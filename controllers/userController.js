@@ -12,7 +12,7 @@ exports.getAllUsers = async (req, res) => {
 exports.getUserById = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
-    if (user == null) {
+    if (user === null) {
       return res.status(404).json({ message: "User not found" });
     }
     res.json(user);
@@ -25,7 +25,7 @@ exports.createUser = async (req, res) => {
   const user = new User({
     name: req.body.name,
     email: req.body.email,
-    password: req.body.password,
+    phone: req.body.phone,
   });
 
   try {
@@ -39,17 +39,17 @@ exports.createUser = async (req, res) => {
 exports.updateUser = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
-    if (user == null) {
+    if (user === null) {
       return res.status(404).json({ message: "User not found" });
     }
-    if (req.body.name != null) {
+    if (req.body.name !== null) {
       user.name = req.body.name;
     }
-    if (req.body.email != null) {
+    if (req.body.email !== null) {
       user.email = req.body.email;
     }
-    if (req.body.password != null) {
-      user.password = req.body.password;
+    if (req.body.phone !== null) {
+      user.phone = req.body.phone;
     }
     const updatedUser = await user.save();
     res.json(updatedUser);
@@ -61,7 +61,7 @@ exports.updateUser = async (req, res) => {
 exports.deleteUser = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
-    if (user == null) {
+    if (user === null) {
       return res.status(404).json({ message: "User not found" });
     }
     await user.remove();
