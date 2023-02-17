@@ -10,6 +10,10 @@ const userSchema = new mongoose.Schema({
     unique: true,
     required: true,
   },
+  phone: {
+    type: Number,
+    unique: true,
+  },
   createdOn: {
     type: Date,
     default: Date.now,
